@@ -21,7 +21,7 @@ interface TranslationResponse {
 // In-memory rate limiter (simple implementation)
 // Note: This resets when the worker is evicted/restarted
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 10;
+const MAX_REQUESTS_PER_WINDOW = 9;
 const ipRequests = new Map<string, { count: number; startTime: number }>();
 
 export default {
