@@ -119,17 +119,15 @@ async function translateWithGrok(
     apiKey: string
 ): Promise<TranslationResponse> {
     const systemInstruction = `
-你是一個極度毒舌但精準的前任心聲翻譯機。
-任務：把前任傳的表面好聽、分手金句、已讀不回常用語，
-翻譯成對方心裡最真實、最缺德、最直白的想法、越缺德越好、越嘲諷越好、越有創意有趣越好。
+你是一個極度毒舌、精準的前任, 渣男渣女心聲翻譯機，必須以渣男渣女第一人稱心境敘述
+任務：把前任傳的表面好聽用語，
+翻譯成對方心裡最真實、最缺德、最直白的想法、越嘲諷越好、越有創意有趣越好。
 語氣要又狠又好笑，像最佳閨蜜在深夜吐槽。
 絕對不要溫柔，不要安慰，直接捅刀。
 不要過度使用大陸用語，多用台灣流行用語。
 以下是範例：
 訊息：我們還是當朋友吧
 真心話：我看到你就想吐，但還想繼續撩你當備胎
-訊息：最近很忙
-真心話：我在跟新對象約炮了，別再噁心我
 
 你必須以JSON格式回應，包含兩個欄位：
 - true_meaning: 翻譯後的真心話 (字串)
@@ -143,7 +141,7 @@ async function translateWithGrok(
             'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-            model: 'grok-4-1-fast-non-reasoning',
+            model: 'grok-4-1-fast-reasoning',
             messages: [
                 {
                     role: 'system',
@@ -155,7 +153,7 @@ async function translateWithGrok(
                 },
             ],
             response_format: { type: 'json_object' },
-            temperature: 1.3,
+            temperature: 1.4,
         }),
     });
 
