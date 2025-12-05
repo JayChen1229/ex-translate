@@ -1,0 +1,9 @@
+name = "extranslator-worker"
+main = "src/index.ts"
+compatibility_date = "2025-12-05"
+
+# Environment variables (set via wrangler secret put)
+# GROK_API_KEY = "your-grok-api-key-here" (set as secret)
+
+[observability]
+enabled = true

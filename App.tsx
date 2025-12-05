@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
   const handleTranslate = async () => {
     if (!message.trim()) return;
-    
+
     setLoading(true);
     setError(null);
     setResult(null);
@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-gray-200 font-sans selection:bg-rose-500 selection:text-white flex flex-col">
-      
+
       {/* Header */}
       <header className="border-b border-gray-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -58,27 +58,27 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-grow flex flex-col items-center justify-center p-4 md:p-8">
-        
+
         {!result ? (
           <div className="w-full max-w-2xl animate-fade-in-up">
-            
+
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">
                 不要相信<span className="text-rose-500">鬼話</span>。
               </h2>
               <p className="text-gray-400 text-lg">
-                把前任那些模稜兩可、假裝深情的訊息貼上來，<br className="hidden sm:block"/>
+                把前任那些模稜兩可、假裝深情的訊息貼上來，<br className="hidden sm:block" />
                 讓 AI 告訴你背後有多缺德。
               </p>
             </div>
 
             <div className="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 shadow-xl backdrop-blur-sm">
-              
+
               {/* Input Controls */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase">對方是誰</label>
-                  <select 
+                  <select
                     value={sender}
                     onChange={(e) => setSender(e.target.value as SenderType)}
                     className="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all appearance-none cursor-pointer"
@@ -91,7 +91,7 @@ const App: React.FC = () => {
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase">現在什麼狀況</label>
-                  <select 
+                  <select
                     value={context}
                     onChange={(e) => setContext(e.target.value as RelationshipContext)}
                     className="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all appearance-none cursor-pointer"
@@ -126,8 +126,8 @@ const App: React.FC = () => {
                 onClick={handleTranslate}
                 disabled={loading || !message.trim()}
                 className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all transform active:scale-95
-                  ${loading || !message.trim() 
-                    ? 'bg-gray-800 text-gray-500 cursor-not-allowed' 
+                  ${loading || !message.trim()
+                    ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
                     : 'bg-gradient-to-r from-rose-600 to-rose-700 text-white hover:from-rose-500 hover:to-rose-600 shadow-lg shadow-rose-900/20'
                   }`}
               >
@@ -143,7 +143,7 @@ const App: React.FC = () => {
                   </>
                 )}
               </button>
-              
+
               <p className="mt-4 text-center text-xs text-gray-600">
                 *注意：本服務極度毒舌，玻璃心請勿使用。
               </p>
@@ -156,7 +156,7 @@ const App: React.FC = () => {
 
       {/* Footer */}
       <footer className="p-6 text-center text-gray-600 text-sm">
-        <p>&copy; {new Date().getFullYear()} Toxic Translator. Powered by Gemini 2.5 Flash.</p>
+        <p>&copy; {new Date().getFullYear()} Toxic Translator. Powered by Grok.</p>
       </footer>
     </div>
   );
