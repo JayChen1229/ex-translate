@@ -154,6 +154,7 @@ async function translateWithGrok(
             ],
             response_format: { type: 'json_object' },
             temperature: 1.4,
+            max_tokens: 500,
         }),
     });
 
