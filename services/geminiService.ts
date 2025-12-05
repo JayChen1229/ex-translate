@@ -1,12 +1,10 @@
-import { RelationshipContext, SenderType, TranslationResponse } from "../types";
+import { TranslationResponse } from "../types";
 
 // Worker API endpoint - can be overridden via environment variable
 const WORKER_URL = import.meta.env.VITE_WORKER_URL || 'https://extranslator-worker.samolab.workers.dev';
 
 export const translateExMessage = async (
-  message: string,
-  context: RelationshipContext,
-  sender: SenderType
+  message: string
 ): Promise<TranslationResponse> => {
   try {
     const response = await fetch(`${WORKER_URL}/api/translate`, {
@@ -15,9 +13,7 @@ export const translateExMessage = async (
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        message,
-        context,
-        sender,
+        message
       }),
     });
 

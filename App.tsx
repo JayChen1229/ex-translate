@@ -3,12 +3,10 @@ import React, { useState } from 'react';
 import { SkullIcon, SendIcon, RefreshCwIcon } from './components/ui/Icons';
 import ResultDisplay from './components/ResultDisplay';
 import { translateExMessage } from './services/geminiService';
-import { RelationshipContext, SenderType, TranslationResponse } from './types';
+import { TranslationResponse } from './types';
 
 const App: React.FC = () => {
   const [message, setMessage] = useState('');
-  const [sender, setSender] = useState<SenderType>(SenderType.TOXIC_EX);
-  const [context, setContext] = useState<RelationshipContext>(RelationshipContext.GHOSTING);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<TranslationResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +19,7 @@ const App: React.FC = () => {
     setResult(null);
 
     try {
-      const translation = await translateExMessage(message, context, sender);
+      const translation = await translateExMessage(message);
       setResult(translation);
     } catch (err) {
       setError("翻譯機過熱，可能是前任的怨念太深導致系統崩潰，請稍後再試。");
@@ -73,35 +71,6 @@ const App: React.FC = () => {
             </div>
 
             <div className="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 shadow-xl backdrop-blur-sm">
-
-              {/* Input Controls */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-500 uppercase">對方是誰</label>
-                  <select
-                    value={sender}
-                    onChange={(e) => setSender(e.target.value as SenderType)}
-                    className="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all appearance-none cursor-pointer"
-                  >
-                    {Object.values(SenderType).map((t) => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-500 uppercase">現在什麼狀況</label>
-                  <select
-                    value={context}
-                    onChange={(e) => setContext(e.target.value as RelationshipContext)}
-                    className="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all appearance-none cursor-pointer"
-                  >
-                    {Object.values(RelationshipContext).map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
 
               {/* Text Area */}
               <div className="space-y-2 mb-6">

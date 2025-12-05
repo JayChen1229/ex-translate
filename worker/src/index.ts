@@ -9,8 +9,6 @@ export interface Env {
 
 interface TranslateRequest {
     message: string;
-    context: string;
-    sender: string;
 }
 
 interface TranslationResponse {
@@ -95,14 +93,14 @@ export default {
         try {
             // Parse request body
             const body = await request.json() as TranslateRequest;
-            const { message, context, sender } = body;
+            const { message } = body;
 
-            if (!message || !context || !sender) {
-                return jsonResponse({ error: 'Missing required fields: message, context, sender' }, 400, corsHeaders);
+            if (!message) {
+                return jsonResponse({ error: 'Missing required field: message' }, 400, corsHeaders);
             }
 
             // Call Grok API
-            const translation = await translateWithGrok(message, context, sender, env.GROK_API_KEY);
+            const translation = await translateWithGrok(message, env.GROK_API_KEY);
 
             return jsonResponse(translation, 200, corsHeaders);
         } catch (error) {
@@ -118,8 +116,6 @@ export default {
 
 async function translateWithGrok(
     message: string,
-    context: string,
-    sender: string,
     apiKey: string
 ): Promise<TranslationResponse> {
     const systemInstruction = `
@@ -134,10 +130,6 @@ async function translateWithGrok(
 真心話：我看到你就想吐，但還想繼續撩你當備胎
 訊息：最近很忙
 真心話：我在跟新對象約炮了，別再噁心我
-
-情境參數：
-- 前任角色：${sender}
-- 關係狀態：${context}
 
 你必須以JSON格式回應，包含兩個欄位：
 - true_meaning: 翻譯後的真心話 (字串)
